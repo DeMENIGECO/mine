@@ -1,1 +1,8 @@
 
+[
+  {
+    "name": "Admin",
+    "staff": true,
+    "passwordHash": ""
+  }
+]
