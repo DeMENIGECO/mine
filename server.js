@@ -52,6 +52,9 @@ function loadUrls() {
     }
 
     try {
+        // ❗ clear cache
+        delete require.cache[require.resolve(filePath)];
+
         return require(filePath);
     } catch (err) {
         console.error("Error loading urls.js:", err);
@@ -83,19 +86,23 @@ app.get("/", (req, res) => {
  * AVVIO SERVER
  */
 
-const routes = loadUrls();
+function registerRoutes() {
+    const routes = loadUrls();
 
-routes.forEach(route => {
-    const method = (route.method || "get").toLowerCase();
+    routes.forEach(route => {
+        const method = (route.method || "get").toLowerCase();
 
-    if (!app[method]) {
-        console.log("Invalid method:", method);
-        return;
-    }
+        if (!app[method]) {
+            console.log("Invalid method:", method);
+            return;
+        }
 
-    app[method](route.path, route.handler);
-});
+        app[method](route.path, route.handler);
+    });
+}
 
+
+registerRoutes();
 app.listen(3000, () => {
     console.log("MINE ADMIN v0.1.0")
     console.log("---------------------")
