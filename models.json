@@ -1,1 +1,11 @@
-
+[
+  {
+    "name": "example",
+    "viewed": "Esempio",
+    "fields": {
+      "date": "DateField",
+      "time": "TimeField",
+      "text": "LongTextField::max:1000"
+    }
+  }
+]
