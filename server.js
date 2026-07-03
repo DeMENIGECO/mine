@@ -100,9 +100,9 @@ app.listen(3000, () => {
     console.log("MINE ADMIN v0.1.0")
     console.log("---------------------")
     console.log("")
-    console.log("Usando URLPatterns:")
-    console.log("  - MineDefaluts")
-    console.log("  - urls.js")
+    console.log("URL Patterns:");
+    console.log("  - MineDefaults (built-in)");
+    console.log("  - urls.js (project routes)");
     console.log("")
     console.log("DEBUG\n---------------------")
     console.log("")
