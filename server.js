@@ -10,6 +10,22 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/admin/index.html");
 });
 
+function readJson(path) {
+    return JSON.parse(fs.readFileSync(path, "utf8"));
+}
+
+app.get("/api/models", (req, res) => {
+    res.json(readJson("models.json"));
+});
+
+app.get("/api/db", (req, res) => {
+    res.json(readJson("db.json"));
+});
+
+app.get("/api/users", (req, res) => {
+    res.json(readJson("users.json"));
+});
+
 app.listen(3000, () => {
     console.log("Mine avviato su http://localhost:3000");
 });
