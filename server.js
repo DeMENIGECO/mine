@@ -43,6 +43,22 @@ function writeJson(file, data) {
  * API READ
  */
 
+function loadUrls() {
+    const filePath = path.join(PROJECT_DIR, "urls.js");
+
+    if (!fs.existsSync(filePath)) {
+        console.log("No urls.js found in project");
+        return [];
+    }
+
+    try {
+        return require(filePath);
+    } catch (err) {
+        console.error("Error loading urls.js:", err);
+        return [];
+    }
+}
+
 app.get("/api/models", (req, res) => {
     res.json(readJson("models.json"));
 });
@@ -66,6 +82,19 @@ app.get("/", (req, res) => {
 /**
  * AVVIO SERVER
  */
+
+const routes = loadUrls();
+
+routes.forEach(route => {
+    const method = (route.method || "get").toLowerCase();
+
+    if (!app[method]) {
+        console.log("Invalid method:", method);
+        return;
+    }
+
+    app[method](route.path, route.handler);
+});
 
 app.listen(3000, () => {
     console.log("MINE ADMIN v0.1.0")
