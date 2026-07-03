@@ -50,44 +50,84 @@ function updateUser(PROJECT_DIR, id, data) {
 }
 
 /**
+ * MODELLI CRUD BASE
+ */
+
+function getModel(PROJECT_DIR, modelName) {
+    const models = readJson(PROJECT_DIR, "models.json");
+    return models.find(m => m.name === modelName);
+}
+
+function getRecords(PROJECT_DIR, modelName) {
+    const db = readJson(PROJECT_DIR, "db.json");
+    return db.filter(item => item.model === modelName);
+}
+
+/**
  * CRUD MODELLI: CREATE MODEL
  */
 
-function createModel(PROJECT_DIR, model) {
-    const models = readJson(PROJECT_DIR, "models.json");
+function createRecord(PROJECT_DIR, modelName, data) {
+    const db = readJson(PROJECT_DIR, "db.json");
 
-    models.push(model);
+    const newItem = {
+        id: db.length > 0 ? db[db.length - 1].id + 1 : 0,
+        model: modelName,
+        ...data
+    };
 
-    writeJson(PROJECT_DIR, "models.json", models);
+    db.push(newItem);
 
-    return model;
+    writeJson(PROJECT_DIR, "db.json", db);
+
+    return newItem;
 }
 
 /**
  * CRUD MODELLI: UPDATE MODEL
  */
-function updateModel(PROJECT_DIR, name, data) {
-    const models = readJson(PROJECT_DIR, "models.json");
+function updateRecord(PROJECT_DIR, id, data) {
+    const db = readJson(PROJECT_DIR, "db.json");
 
-    const index = models.findIndex(m => m.name === name);
+    const index = db.findIndex(item => item.id === id);
 
     if (index === -1) return null;
 
-    models[index] = {
-        ...models[index],
+    db[index] = {
+        ...db[index],
         ...data,
-        name
+        id
     };
 
-    writeJson(PROJECT_DIR, "models.json", models);
+    writeJson(PROJECT_DIR, "db.json", db);
 
-    return models[index];
+    return db[index];
 }
 
+/**
+ * CRUD MODELLI: DELETE MODEL
+ */
+
+function deleteRecord(PROJECT_DIR, id) {
+    const db = readJson(PROJECT_DIR, "db.json");
+
+    const newDb = db.filter(item => item.id !== id);
+
+    writeJson(PROJECT_DIR, "db.json", newDb);
+
+    return true;
+}
+
+/**
+ * Exports
+ */
 
 module.exports = {
+    getModel,
+    getRecords,
+    createRecord,
+    updateRecord,
+    deleteRecord,
     createUser,
     updateUser,
-    createModel,
-    updateModel
 };
