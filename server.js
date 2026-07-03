@@ -1,6 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const crud = require("./crud.js");
 
 const app = express();
 
@@ -72,6 +73,51 @@ app.get("/api/db", (req, res) => {
 
 app.get("/api/users", (req, res) => {
     res.json(readJson("users.json"));
+});
+
+app.post("/api/users", (req, res) => {
+    const user = crud.createUser(PROJECT_DIR, req.body);
+    res.json(user);
+});
+
+app.put("/api/users/:id", (req, res) => {
+    const id = Number(req.params.id);
+
+    const user = crud.updateUser(PROJECT_DIR, id, req.body);
+
+    if (!user) {
+        return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json(user);
+});
+
+app.post("/api/db/:model", (req, res) => {
+    const result = crud.createRecord(
+        PROJECT_DIR,
+        req.params.model,
+        req.body
+    );
+
+    res.json(result);
+});
+
+app.put("/api/db/:id", (req, res) => {
+    const id = Number(req.params.id);
+
+    const result = crud.updateRecord(PROJECT_DIR, id, req.body);
+
+    if (!result) {
+        return res.status(404).json({ error: "Not found" });
+    }
+
+    res.json(result);
+});
+
+app.delete("/api/db/:id", (req, res) => {
+    crud.deleteRecord(PROJECT_DIR, Number(req.params.id));
+
+    res.json({ ok: true });
 });
 
 /**
