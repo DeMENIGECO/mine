@@ -2,6 +2,10 @@
   "name": "@DeMENIGECO/mine",
   "version": "0.1.0",
   "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DeMENIGECO/mine.git"
+},
   "bin": {
     "mine": "./cli/main.js"
   },
