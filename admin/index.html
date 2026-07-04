@@ -1,53 +1,49 @@
-
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Mine Admin</title>
-    <style>
-        body {
-            font-family: Arial;
-            display: flex;
-            margin: 0;
-        }
 
-        #sidebar {
-            width: 250px;
-            background: #111;
-            color: white;
-            height: 100vh;
-            padding: 10px;
-        }
-
-        #content {
-            flex: 1;
-            padding: 20px;
-        }
-
-        .model {
-            padding: 10px;
-            cursor: pointer;
-            border-bottom: 1px solid #333;
-        }
-
-        .model:hover {
-            background: #222;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="sidebar">
-    <h3>Mine</h3>
-    <div id="models"></div>
-</div>
+    <header id="header">
+        <div>
+            <h1>Mine Admin</h1>
+            <p>Manage your project</p>
+        </div>
+    </header>
 
-<div id="content">
-    <h2>Seleziona un modello</h2>
-    <div id="table"></div>
-</div>
+    <div id="layout">
 
-<script src="app.js"></script>
+        <aside id="sidebar">
+            <button data-page="dashboard">🏠 Dashboard</button>
+            <button data-page="models">📦 Models</button>
+            <button data-page="database">🗃 Database</button>
+            <button data-page="users">👥 Users</button>
+            <button data-page="settings">⚙ Settings</button>
+        </aside>
+
+        <main id="content">
+
+            <section id="page">
+                <h2>Welcome to Mine Admin</h2>
+
+                <p>
+                    Select a page from the sidebar.
+                </p>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="api.js"></script>
+    <script src="ui.js"></script>
+    <script src="app.js"></script>
 
 </body>
 </html>
