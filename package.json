@@ -1,5 +1,5 @@
 {
-  "name": "mine",
+  "name": "@DeMENIGECO/mine",
   "version": "0.1.0",
   "main": "server.js",
   "bin": {
@@ -10,5 +10,16 @@
   },
   "dependencies": {
     "express": "^4.22.2"
-  }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+  "server.js",
+  "admin",
+  "crud.js",
+  "cli",
+  "demo",
+  "README.md"
+  ]
 }
