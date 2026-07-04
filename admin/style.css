@@ -1,1 +1,140 @@
 
+/* RESET BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* BODY */
+body {
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+/* HEADER */
+#header {
+    background: #111827;
+    padding: 20px;
+    border-bottom: 1px solid #1f2937;
+}
+
+#header h1 {
+    font-size: 22px;
+}
+
+#header p {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+/* LAYOUT */
+#layout {
+    display: flex;
+    height: calc(100vh - 70px);
+}
+
+/* SIDEBAR */
+#sidebar {
+    width: 220px;
+    background: #111827;
+    padding: 15px;
+    border-right: 1px solid #1f2937;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#sidebar button {
+    background: #1f2937;
+    color: #e2e8f0;
+    border: none;
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+#sidebar button:hover {
+    background: #334155;
+}
+
+/* CONTENT */
+#content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* PAGE */
+#page h2 {
+    margin-bottom: 10px;
+}
+
+#page p {
+    color: #94a3b8;
+}
+
+/* TABLES */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: #111827;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #1f2937;
+    text-align: left;
+}
+
+th {
+    background: #1f2937;
+    color: #cbd5e1;
+}
+
+/* BUTTONS */
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+/* INPUTS / FORMS */
+input, textarea, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid #334155;
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+/* FORM */
+form {
+    background: #111827;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+/* SMALL ACTION BUTTONS */
+td button {
+    padding: 5px 8px;
+    font-size: 12px;
+}
