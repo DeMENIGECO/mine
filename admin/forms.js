@@ -62,3 +62,8 @@ function generateForm(model, data = {}) {
     return html;
 }
 
+async function openCreateForm(selectedModel) {
+    const model = await api.getModel(selectedModel);
+
+    page.innerHTML = generateForm(model);
+}
