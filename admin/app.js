@@ -1,77 +1,71 @@
-let models = [];
-let db = [];
 
-async function loadModels() {
-    const res = await fetch("/api/models");
-    models = await res.json();
+const page = document.getElementById("page");
 
-    const container = document.getElementById("models");
-    container.innerHTML = "";
+function showDashboard() {
+    page.innerHTML = `
+        <h2>Dashboard</h2>
 
-    models.forEach(model => {
-        const div = document.createElement("div");
-        div.className = "model";
-        div.innerText = model.viewed || model.name;
+        <p>Welcome to Mine Admin.</p>
+    `;
+}
 
-        div.onclick = () => loadModel(model.name);
+function showModels() {
+    page.innerHTML = `
+        <h2>Models</h2>
 
-        container.appendChild(div);
+        <p>Loading models...</p>
+    `;
+}
+
+function showDatabase() {
+    page.innerHTML = `
+        <h2>Database</h2>
+
+        <p>Select a model.</p>
+    `;
+}
+
+function showUsers() {
+    page.innerHTML = `
+        <h2>Users</h2>
+
+        <p>Loading users...</p>
+    `;
+}
+
+function showSettings() {
+    page.innerHTML = `
+        <h2>Settings</h2>
+
+        <p>Mine Admin v0.1.0</p>
+    `;
+}
+
+document.querySelectorAll("#sidebar button").forEach(button => {
+    button.addEventListener("click", () => {
+        switch (button.dataset.page) {
+            case "dashboard":
+                showDashboard();
+                break;
+
+            case "models":
+                showModels();
+                break;
+
+            case "database":
+                showDatabase();
+                break;
+
+            case "users":
+                showUsers();
+                break;
+
+            case "settings":
+                showSettings();
+                break;
+        }
     });
-}
+});
 
-async function loadModel(name) {
-    const res = await fetch("/api/db");
-    db = await res.json();
-
-    const filtered = db.filter(item => item.model === name);
-
-    renderTable(filtered);
-}
-
-function renderTable(data) {
-    const table = document.getElementById("table");
-
-    if (data.length === 0) {
-        table.innerHTML = "<p>Nessun dato</p>";
-        return;
-    }
-
-    const keys = Object.keys(data[0]).filter(k => k !== "id");
-
-    let html = "<table border='1' cellpadding='5'>";
-
-    html += "<tr>";
-    keys.forEach(k => html += `<th>${k}</th>`);
-    html += "<th>azioni</th>";
-    html += "</tr>";
-
-    data.forEach(row => {
-        html += "<tr>";
-
-        keys.forEach(k => {
-            html += `<td>${row[k]}</td>`;
-        });
-
-        html += `
-            <td>
-                <button onclick="deleteItem(${row.id})">Delete</button>
-            </td>
-        `;
-
-        html += "</tr>";
-    });
-
-    html += "</table>";
-
-    table.innerHTML = html;
-}
-
-async function deleteItem(id) {
-    await fetch(`/api/db/${id}`, {
-        method: "DELETE"
-    });
-
-    location.reload();
-}
-
-loadModels();
+// Pagina iniziale
+showDashboard();
