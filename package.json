@@ -2,6 +2,9 @@
   "name": "mine",
   "version": "0.1.0",
   "main": "server.js",
+  "bin": {
+    "mine": "./cli/main.js"
+  },
   "scripts": {
     "start": "node server.js"
   },
